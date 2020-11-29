@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/yar-on/express-jsonwebtoken.git"
   },
-  "author": "yar-on, ranamar16",
+  "author": "yar-on, ranamar16, nofarisraeli, yogev-uzan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/yar-on/express-jsonwebtoken/issues"
