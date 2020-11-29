@@ -1,0 +1,29 @@
+{
+  "name": "express-jsonwebtoken",
+  "version": "0.0.1",
+  "description": "JsonWebToken (JWT) manager for express,",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -b tests/index.js",
+    "release": "npm test && release-it"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yar-on/express-jsonwebtoken.git"
+  },
+  "author": "yar-on, ranamar16",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yar-on/express-jsonwebtoken/issues"
+  },
+  "homepage": "https://github.com/yar-on/express-jsonwebtoken#readme",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "ms": "^2.1.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.3",
+    "release-it": "^14.2.1"
+  }
+}
