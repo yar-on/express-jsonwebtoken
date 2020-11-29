@@ -17,6 +17,21 @@
     "url": "https://github.com/yar-on/express-jsonwebtoken/issues"
   },
   "homepage": "https://github.com/yar-on/express-jsonwebtoken#readme",
+  "keywords": [
+    "express",
+    "jsonwebtoken",
+    "jwt",
+    "auth",
+    "authentication",
+    "authorization",
+    "http",
+    "token",
+    "security",
+    "middleware",
+    "validator",
+    "blacklist",
+    "json web token"
+  ],
   "dependencies": {
     "jsonwebtoken": "^8.5.1",
     "ms": "^2.1.2"
