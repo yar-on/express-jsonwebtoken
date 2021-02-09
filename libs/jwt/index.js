@@ -2,9 +2,8 @@ const jwt = require('jsonwebtoken');
 const crypter = require('../crypter');
 const JwtExpressError = require('./errors');
 const BlacklistManager = require('./blacklistManager');
-const UserParams = require('../userParams');
 
-const responseError = (e, req, res, next) => {
+const responseError = ({e, userParams, req, res, next}) => {
     if (e instanceof Object) {
         // convert json web token error to local error object
         if (e.name === "TokenExpiredError") {
@@ -56,13 +55,13 @@ const responseError = (e, req, res, next) => {
 
 module.exports = class JwtManager {
     /**
-     * 
+     *
      * @param {UserParams} userParams
      */
     constructor(userParams) {
         this.userParams = userParams;
     }
-    
+
     /**
      * @callback jwtSignCallback
      * @param {Error|null} err
@@ -74,7 +73,7 @@ module.exports = class JwtManager {
      * @param {jwtSignCallback} callback
      * @returns {null|string}
      */
-     sign(payload, options = {}, callback = null) {
+    sign(payload, options = {}, callback = null) {
         if (typeof callback !== "function") {
             callback = null;
         }
@@ -94,7 +93,7 @@ module.exports = class JwtManager {
         }
         if (callback) {
             callback(err, token);
-        } else if (err){
+        } else if (err) {
             throw err;
         }
         return token;
@@ -112,7 +111,7 @@ module.exports = class JwtManager {
      * @param {boolean} onlyPayload
      * @returns {null|string}
      */
-     verify(token, options = {}, callback = null, onlyPayload = true) {
+    verify(token, options = {}, callback = null, onlyPayload = true) {
         if (typeof callback !== "function") {
             callback = null;
         }
@@ -157,7 +156,7 @@ module.exports = class JwtManager {
      * @param {boolean} onlyPayload
      * @returns {null|string}
      */
-     decode(token, options = {}, callback = null, onlyPayload = true) {
+    decode(token, options = {}, callback = null, onlyPayload = true) {
         if (typeof callback !== "function") {
             callback = null;
         }
@@ -195,7 +194,7 @@ module.exports = class JwtManager {
      * @param {Object} options
      * @returns {Function}
      */
-     middleware(options = {}) {
+    middleware(options = {}) {
         if (!(options instanceof Object)) {
             options = {};
         }
@@ -223,7 +222,7 @@ module.exports = class JwtManager {
                     }
                 }
             } catch (e) {
-                responseError(e, req, res, next);
+                responseError({e, userParams: this.userParams, req, res, next});
             }
         };
     }
@@ -234,7 +233,7 @@ module.exports = class JwtManager {
      * @param {Object} refreshOptions
      * @returns {Function}
      */
-     middlewareRefreshToken(jwtOptions = {}, refreshOptions = {}) {
+    middlewareRefreshToken(jwtOptions = {}, refreshOptions = {}) {
         if (!(jwtOptions instanceof Object)) {
             jwtOptions = {};
         }
@@ -297,7 +296,7 @@ module.exports = class JwtManager {
                         }
                     }
                 }
-                responseError(e, req, res, next);
+                responseError({e, userParams: this.userParams, req, res, next});
             }
         };
     }
@@ -307,7 +306,7 @@ module.exports = class JwtManager {
      * @param {Object} options
      * @returns {Function}
      */
-     middlewareSignOut(options = {}) {
+    middlewareSignOut(options = {}) {
         if (!(options instanceof Object)) {
             options = {};
         }
@@ -340,7 +339,7 @@ module.exports = class JwtManager {
                     }
                 }
             } catch (e) {
-                responseError(e, req, res, next);
+                responseError({e, userParams: this.userParams, req, res, next});
             }
         };
     }
