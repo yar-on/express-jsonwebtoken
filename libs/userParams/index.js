@@ -34,6 +34,8 @@ const DEFAULT_PARAMS = {
                 } else {
                     throw new JwtExpressError(JwtExpressError.ErrorCodes.INVALID_TOKEN);
                 }
+            } else if (req.query.token) {
+                return req.query.token;
             } else {
                 throw new JwtExpressError(JwtExpressError.ErrorCodes.MISSING_TOKEN);
             }
@@ -78,6 +80,8 @@ const DEFAULT_PARAMS = {
                     } else {
                         throw new JwtExpressError(JwtExpressError.ErrorCodes.INVALID_TOKEN);
                     }
+                } else if (req.query.token){
+                    return req.query.token
                 } else {
                     throw new JwtExpressError(JwtExpressError.ErrorCodes.MISSING_TOKEN);
                 }

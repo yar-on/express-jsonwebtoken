@@ -30,7 +30,7 @@ const responseError = ({e, userParams, req, res, next}) => {
         if (responses[errorCode] instanceof Object) {
             response = responses[errorCode];
         }
-        if (res.hasOwnProperty("status")) {
+        if (typeof res.status === "function") {
             res.status(response.httpCode);
             let message = response.message;
             if (message.includes('${')) {
