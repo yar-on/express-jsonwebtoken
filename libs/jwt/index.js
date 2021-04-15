@@ -40,7 +40,7 @@ const responseError = ({e, userParams, req, res, next}) => {
                     }
                 }
             }
-            if (req.header['Accept'] === 'application/json') {
+            if (req.header('accept') === 'application/json') {
                 res.json({message: response.message});
             } else {
                 res.send(response.message);

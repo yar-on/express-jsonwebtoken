@@ -199,11 +199,13 @@ new JwtExpress({
                 // mutatePayload: false
             },
             getToken: (req) => {
-                if (req.headers && req.headers['refresh-token'] && typeof req.headers['refresh-token'] === "string") {
-                    const parts = req.headers.authorization.split(' ');
+                const refreshToken = req.header('refresh-token');
+                if (refreshToken && typeof refreshToken === "string") {
+                    const parts = refreshToken.split(' ');
                     if (parts.length === 2) {
                         const scheme = parts[0];
                         const token = parts[1];
+
                         if (scheme === "Bearer") {
                             return token;
                         } else {
@@ -212,6 +214,8 @@ new JwtExpress({
                     } else {
                         throw new JwtExpressError(JwtExpressError.ErrorCodes.INVALID_TOKEN);
                     }
+                } else if (req.query.token) {
+                    return req.query.token
                 } else {
                     throw new JwtExpressError(JwtExpressError.ErrorCodes.MISSING_TOKEN);
                 }
@@ -221,11 +225,13 @@ new JwtExpress({
         useEncrypt: false,
         useBlacklist: false,
         getToken: (req) => {
-            if (req.headers && req.headers.authorization && typeof req.headers.authorization === "string") {
-                const parts = req.headers.authorization.split(' ');
+            const authorizationHeader = req.header('authorization')
+            if (authorizationHeader && typeof authorizationHeader === "string") {
+                const parts = authorizationHeader.split(' ');
                 if (parts.length === 2) {
                     const scheme = parts[0];
                     const token = parts[1];
+
                     if (scheme === "Bearer") {
                         return token;
                     } else {
@@ -234,6 +240,8 @@ new JwtExpress({
                 } else {
                     throw new JwtExpressError(JwtExpressError.ErrorCodes.INVALID_TOKEN);
                 }
+            } else if (req.query.token) {
+                return req.query.token;
             } else {
                 throw new JwtExpressError(JwtExpressError.ErrorCodes.MISSING_TOKEN);
             }
