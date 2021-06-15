@@ -1,6 +1,6 @@
 {
   "name": "express-jsonwebtoken",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "JsonWebToken (JWT) manager for express,",
   "main": "index.js",
   "scripts": {
